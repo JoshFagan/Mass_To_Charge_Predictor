@@ -26,12 +26,6 @@ The program interprets this as find every structure that contains any combinatio
  oxygen atoms (in 1:1 ratio) and nitrogen and oxygen atoms (in 1:2 ratio) up to the largest structure with 5 CH2 blocks, 2 PO blocks, and NO2 blocks. It then adds up the total mass of each structure and divides each of those masses by the charge. The list is now in m/z units. It then returns all chemical formulas that match the m/z value input by the user. One solution to the given m/z value is (CH2)3PONO2 or C3H6O3PN.
 A program that will take chemical "building blocks" and return all possible structures made from those blocks (with reasonably finite numbers of each block dictated by the user) along with the mass of each structure. 
 
-
-
-
-An addendum to the unit is that the instrument used to characterize a sample measures mass/charge (m/z), where the charge is arbitrary as well. Rather than have the program calculate permutations for each possible charge, it would be better to have the user input the suspected charge, and they could always run the program several times to test different charges. Additionally, to add some finess, it would be best to have the user input an observed mass and have the program return any computed structures that have that same mass.
-
-
 ## Developement Notes
 Store mass values of each atom
 H = 1, He = 4, C = 12, N = 14, O = 16, Au = 196.97, etc.
