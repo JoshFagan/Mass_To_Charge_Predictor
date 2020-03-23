@@ -9,6 +9,12 @@ The goal is to be able to make something in the lab, measure the mass of the pro
 - Charge of experiment
 - Observed mass of experiment
 
+Lists of molecules and their corresponding quantities can be passed to the program via command line arguments, csv files, or input line responces. 
+
+Run python mass_to_charge_predictor -h to find instructions on how to pass lists as csv and command line arguments. If both methods are selected, an error will be thrown. If the lists are to be passed as a csv, the file should be structured as the first column being the molecule, and the second column being the maximum quantity. 
+
+The absence of any input at the command line will result in the program prompting the user for input responces to collect the required inputs. 
+
 ## Returns
 - List of structures (composed of molecules specified by user) that have a total mass equal to the specified mass of experiment.
 
