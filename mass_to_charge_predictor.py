@@ -1,10 +1,7 @@
 import argparse 
 
-def main( args ):
-   print( args ) 
 
-
-if __name__ == "__main__":
+def parse_arguments():
     parser = argparse.ArgumentParser( description='Select building blocks \
                                                    to fit required mass.' )
 
@@ -21,11 +18,23 @@ if __name__ == "__main__":
                          help='Location of file that containes building \
                                blocks and their quantities.' )
 
-
-    parser.add_argument( '-c', '--charge', type=float, nargs=1,
+    parser.add_argument( '-c', '--charge', 
+                         type=int, nargs=1, required=True,
                          help='Charge of experiment.' )
 
     args = parser.parse_args()
 
-    main( args )
+    # Check to ensure if a list of building blocks is supplied than a list 
+    # of quantities is supplied as well, and vise versa
+    if ((args.building_blocks and not args.quantities) or  
+        (not args.building_blocks and args.quantities)):
+        parser.error('The following arguments are mutually inclusive: \
+                      building_blocks, quantities')
 
+
+def main():
+    parse_arguments()
+
+
+if __name__ == "__main__":
+    main()
