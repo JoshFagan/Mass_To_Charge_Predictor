@@ -1,7 +1,7 @@
 import argparse 
 
 
-def parse_arguments():
+def get_args():
     """Define arguments to be parsed from user."""
 
     parser = argparse.ArgumentParser( description='Select building blocks \
@@ -33,14 +33,30 @@ def parse_arguments():
         parser.error('The following arguments are mutually inclusive: \
                       building_blocks, quantities')
 
-    print( args )
+    return args
+
+
+def get_experiment_specs():
+    """Retrieve experiemnt specifications from client.
+    
+    Specifications can come from a combination of command line arguments, 
+    csv files, and standard input.
+    """
+
+    args = get_args() 
+
+    specs = args
+
+    return specs
 
 
 def main():
     """Collect inputs about experiemnt from user and return building block
        combinations that result in the desired mass."""
 
-    parse_arguments()
+    specs = get_experiment_specs()
+
+    print( specs )
 
 
 if __name__ == "__main__":
