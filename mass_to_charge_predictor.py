@@ -2,6 +2,8 @@ import argparse
 
 
 def parse_arguments():
+    """Define arguments to be parsed from user."""
+
     parser = argparse.ArgumentParser( description='Select building blocks \
                                                    to fit required mass.' )
     group = parser.add_mutually_exclusive_group()
@@ -25,7 +27,7 @@ def parse_arguments():
     args = parser.parse_args()
 
     # Check to ensure if a list of building blocks is supplied than a list 
-    # of quantities is supplied as well, and vise versa
+    # of quantities is supplied as well, and vise versa.
     if ((args.building_blocks and not args.quantities) or  
         (not args.building_blocks and args.quantities)):
         parser.error('The following arguments are mutually inclusive: \
@@ -35,6 +37,9 @@ def parse_arguments():
 
 
 def main():
+    """Collect inputs about experiemnt from user and return building block
+       combinations that result in the desired mass."""
+
     parse_arguments()
 
 
