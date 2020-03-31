@@ -22,7 +22,7 @@ def get_args():
                                blocks and their quantities.' )
 
     parser.add_argument( '-c', '--charge', 
-                         type=int, nargs=1, required=True,
+                         type=int, nargs=1, required=False,
                          help='Charge of experiment.' )
 
     args = parser.parse_args()
@@ -43,7 +43,6 @@ def get_experiment_specs():
     Specifications can come from a combination of command line arguments, 
     csv files, and standard input.
     """
-    specs = {}
     args  = get_args() 
 
     # If a building block file is supplied, read the file and store the 
@@ -52,10 +51,11 @@ def get_experiment_specs():
         df = pd.read_csv( args.building_block_file[0], 
                           names=['blocks', 'quantities'] )
 
-        specs['building_blocks'] = df['blocks'].tolist()
+        args.building_blocks = df['blocks'].tolist()
+        args.quantities      = df['quantities'].tolist()
 
-        print( specs )
+
 
     # Augment any missing specifications with prompts to standard input.
 
-    return specs
+    return args 
