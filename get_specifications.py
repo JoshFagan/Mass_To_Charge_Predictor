@@ -36,6 +36,54 @@ def get_args():
 
     return args
 
+def request_missing_specs( args ):
+    # Request charge if missing
+    while not args.charge:
+        charge = input( 'Input interger value for charge:\n' )
+        try:
+            args.charge = int( charge )
+        except:
+            print( 'Charge must be an integer (whole number)' )
+
+    # Request list of building blocks if missing
+    if not args.building_blocks:
+        blocks     = []
+        quantities = []
+
+        block = input( 'Input building block formula:\n' )
+        
+        # Ensure at least one building block is inputted
+        while block == '':
+            block = input( 'There must be at least one building block.\n' +
+                           'Input building block formula:\n' )
+
+        # Keep getting inputs until client is done
+        while not block == '':
+            blocks.append( block )
+            block = input( 'Input additional building block formula ' +
+                           '(press Enter key to finish):')
+
+        # Get respective quantities
+        for block in blocks:
+            while True:
+                quantity = input( 'Input quantity for ' + block + ': ' )
+                try:
+                    quantity = int( quantity )
+                    break
+                except:
+                    print( 'Quantity must be a positive integer (whole number): ' )
+                if quantity < 0:
+                    print( 'Quantity must be a positive integer (whole number): ' )
+            quantities.append( quantity )
+
+        args.building_blocks = blocks
+        args.quantities = quantities
+
+
+        
+
+    
+
 
 def get_experiment_specs():
     """Retrieve experiemnt specifications from client.
@@ -57,5 +105,6 @@ def get_experiment_specs():
 
 
     # Augment any missing specifications with prompts to standard input.
+    request_missing_specs( args )
 
     return args 
