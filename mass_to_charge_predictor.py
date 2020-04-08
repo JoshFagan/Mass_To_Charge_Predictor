@@ -1,4 +1,5 @@
 from get_specifications import get_experiment_specs 
+from parse_building_blocks import get_block_masses 
 
 
 def main():
@@ -8,6 +9,8 @@ def main():
     specs = get_experiment_specs()
 
     print( specs )
+
+    block_masses = get_block_masses( specs.building_blocks )
 
 
 if __name__ == "__main__":
