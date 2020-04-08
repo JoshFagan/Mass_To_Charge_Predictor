@@ -37,6 +37,9 @@ def get_args():
     return args
 
 def request_missing_specs( args ):
+    """ Check for args with no user specified values and request input from
+        the client to fill in missing information. 
+    """
     # Request charge if missing
     while not args.charge:
         charge = input( 'Input interger value for charge:\n' )
