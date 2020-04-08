@@ -88,7 +88,7 @@ def request_missing_specs( args ):
     
 
 
-def get_experiment_specs():
+def get_specs():
     """Retrieve experiemnt specifications from client.
     
     Specifications can come from a combination of command line arguments, 
