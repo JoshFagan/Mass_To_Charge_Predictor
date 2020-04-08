@@ -40,6 +40,7 @@ def get_args():
 
     return args
 
+
 def request_missing_specs( args ):
     """ Check for args with no user specified values and request input from
         the client to fill in missing information. 
@@ -95,11 +96,6 @@ def request_missing_specs( args ):
         args.quantities = quantities
 
 
-        
-
-    
-
-
 def get_specs():
     """Retrieve experiemnt specifications from client.
     
@@ -107,6 +103,11 @@ def get_specs():
     csv files, and standard input.
     """
     args  = get_args() 
+
+    if args.charge:
+        args.charge = args.charge[0]
+    if args.observed_mass:
+        args.observed_mass = args.observed_mass[0]
 
     # If a building block file is supplied, read the file and store the 
     # building blocks and their quantities in the specs structure.
