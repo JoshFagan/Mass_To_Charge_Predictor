@@ -25,6 +25,10 @@ def get_args():
                          type=int, nargs=1, required=False,
                          help='Charge of experiment.' )
 
+    parser.add_argument( '-m', '--observed_mass', 
+                         type=float, nargs=1, required=False,
+                         help='Observed mass of experiment.' )
+
     args = parser.parse_args()
 
     # Check to ensure if a list of building blocks is supplied than a list 
@@ -47,6 +51,14 @@ def request_missing_specs( args ):
             args.charge = int( charge )
         except:
             print( 'Charge must be an integer (whole number)' )
+
+    # Request observed mass if missing
+    while not args.observed_mass:
+        mass = input( 'Input value for observed_mass:\n' )
+        try:
+            args.observed_mass = float( mass)
+        except:
+            print( 'Mass must be an real number' )
 
     # Request list of building blocks if missing
     if not args.building_blocks:
