@@ -25,7 +25,4 @@ def get_block_masses( blocks ):
 
             block_masses[block] += weighted_atomic_mass
 
-        # Remove after testing
-        block_masses[block] = math.floor( block_masses[block] )
-
     return block_masses
