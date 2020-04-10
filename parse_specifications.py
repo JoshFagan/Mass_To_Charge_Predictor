@@ -29,6 +29,11 @@ def get_args():
                          type=float, nargs=1, required=False,
                          help='Observed mass of experiment.' )
 
+    parser.add_argument( '-t', '--threshold', 
+                         type=float, nargs=1, required=False,
+                         help='Threshold of sum to accept a candidate.' )
+
+
     args = parser.parse_args()
 
     # Check to ensure if a list of building blocks is supplied than a list 
@@ -55,9 +60,17 @@ def request_missing_specs( args ):
 
     # Request observed mass if missing
     while not args.observed_mass:
-        mass = input( 'Input value for observed_mass:\n' )
+        mass = input( 'Input value for observed mass:\n' )
         try:
-            args.observed_mass = float( mass)
+            args.observed_mass = float( mass )
+        except:
+            print( 'Mass must be an real number' )
+
+    # Request threshold if missing
+    while not args.threshold:
+        thresh = input( 'Input value for threshold:\n' )
+        try:
+            args.threshold = float( thresh )
         except:
             print( 'Mass must be an real number' )
 
@@ -108,6 +121,8 @@ def get_specs():
         args.charge = args.charge[0]
     if args.observed_mass:
         args.observed_mass = args.observed_mass[0]
+    if args.threshold:
+        args.threshold = args.threshold[0]
 
     # If a building block file is supplied, read the file and store the 
     # building blocks and their quantities in the specs structure.

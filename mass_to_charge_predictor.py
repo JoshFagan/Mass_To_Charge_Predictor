@@ -12,20 +12,20 @@ def sum_of_blocks_masses( blocks, block_masses ):
     return sum( masses ) 
 
 
-def subset_sum( blocks, target_mass, block_masses, partial=[], candidates=set([]) ):
+def subset_sum( blocks, target_mass, block_masses, thresh, partial=[], candidates=set([]) ):
     """Recursive method for solving the subset sum problem modified for this specific application.""" 
     partial_sum = sum_of_blocks_masses( partial, block_masses )
 
     # check if the partial sum is equals to target
-    if partial_sum  == target_mass: 
+    if partial_sum  >= target_mass-thresh and partial_sum <= target_mass+thresh: 
         candidates.add( tuple(partial) )
-    if partial_sum >= target_mass:
+    if partial_sum >= target_mass+thresh:
         return  candidates # if we reach the number why bother to continue
 
     for i in range( len( blocks ) ):
         block = blocks[i]
         remaining = blocks[i+1:]
-        candidates.union( subset_sum( remaining, target_mass, block_masses, partial + [block], candidates ) ) 
+        candidates.union( subset_sum( remaining, target_mass, block_masses, thresh, partial + [block], candidates ) ) 
 
     return candidates
 
@@ -38,7 +38,7 @@ def find_candidates( specs, block_masses ):
         for j in range( specs.quantities[i] ):
             blocks.append( specs.building_blocks[i] ) 
 
-    return subset_sum( blocks, charged_mass, block_masses )
+    return subset_sum( blocks, charged_mass, block_masses, specs.threshold )
 
 
 def main():
@@ -50,7 +50,8 @@ def main():
 
     print( '\tExperiment specifications are:' )
     print( '\tCharge: %i' % specs.charge )
-    print( '\tObserved Mass: %f' % specs.observed_mass)
+    print( '\tObserved Mass: %f' % specs.observed_mass )
+    print( '\tThreshold: %f' % specs.threshold )
     print( '\tQuantity - Building Block:' )
     for i in range(len(specs.quantities) ):
         print( '\t\t%i - %s' % (specs.quantities[i], specs.building_blocks[i]) )
