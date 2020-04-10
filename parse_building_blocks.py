@@ -4,6 +4,7 @@ import re
 import math
 
 def get_block_masses( blocks ):
+    """Calculate total block mass given individual atomic masses."""
     block_masses = {}
 
     atomic_masses = pd.read_csv( './Data/Periodic_Table_of_Elements.csv' )
