@@ -4,13 +4,16 @@ from parse_building_blocks import get_block_masses
 
 
 def sum_of_blocks_masses( blocks, block_masses ):
+    """Calculate the sum of masses for each block given."""
     masses = []
     for i in range( len( blocks ) ):
         masses.append(  block_masses[blocks[i]] )
 
     return sum( masses ) 
 
+
 def subset_sum( blocks, target_mass, block_masses, partial=[], candidates=set([]) ):
+    """Recursive method for solving the subset sum problem modified for this specific application.""" 
     partial_sum = sum_of_blocks_masses( partial, block_masses )
 
     # check if the partial sum is equals to target
@@ -28,6 +31,7 @@ def subset_sum( blocks, target_mass, block_masses, partial=[], candidates=set([]
 
 
 def find_candidates( specs, block_masses ):
+    """Setup for finding candidates via recursive method.""" 
     charged_mass = specs.observed_mass * specs.charge
     blocks = []
     for i in range( len( specs.building_blocks ) ):
@@ -50,7 +54,6 @@ def main():
     print( 'Possible candidates are:' )
     for candidate in candidates:
         print( candidate )
-
 
 
 if __name__ == "__main__":
