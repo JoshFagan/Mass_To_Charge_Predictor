@@ -45,15 +45,36 @@ def main():
     """Collect inputs about experiemnt from user and return building block
        combinations that result in the desired mass."""
 
+    print( 'Retrieving experiment specifications from client.' )
     specs = get_specs()
 
+    print( '\tExperiment specifications are:' )
+    print( '\tCharge: %i' % specs.charge )
+    print( '\tObserved Mass: %f' % specs.observed_mass)
+    print( '\tQuantity - Building Block:' )
+    for i in range(len(specs.quantities) ):
+        print( '\t\t%i - %s' % (specs.quantities[i], specs.building_blocks[i]) )
+
+
+    print( '\nParsing blocks and calculating masses.' )
     block_masses = get_block_masses( specs.building_blocks )
 
+    print( '\tBuilding Block - Mass of Building Block:' )
+    for block in specs.building_blocks:
+        print('\t\t%s - %f' % (block, block_masses[block] ) )
+
+
+    print( '\nFinding all viable candidate block combinations.' )
     candidates = find_candidates( specs, block_masses )
 
-    print( 'Possible candidates are:' )
-    for candidate in candidates:
-        print( candidate )
+    print( '\tCandidate block combinations are:', end='\n\t\t' )
+    if len(candidates) == 0:
+        print( 'There are no viable candidates.' )
+    else:
+        for candidate in candidates:
+            print(  candidate, end='\n\t\t' )
+
+    print()
 
 
 if __name__ == "__main__":
